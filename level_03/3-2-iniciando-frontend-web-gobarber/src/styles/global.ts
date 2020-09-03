@@ -23,7 +23,7 @@ export default createGlobalStyle`
      font-weight: 500;
  }
 
- button: {
+ button {
      cursor: pointer;
  }
 
