@@ -12,7 +12,7 @@ import Button from '../../components/Button';
 import { Container, Content, Background } from './styles';
 import { FormHandles } from '@unform/core';
 
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../hooks/AuthContext'
 import getValidationErrors from '../../utils/getValidationErrors';
 
 interface SignInFormData {
