@@ -14,7 +14,7 @@ interface Request {
 }
 
 interface Response {
-  user: User;
+  user: Omit<User, 'password'>;
   token: string;
 }
 
@@ -42,14 +42,14 @@ class AuthenticateUserService {
       throw new AppError('Incorrect email/password combination.', 401);
     }
 
-    delete user.password;
+    const { password: userPassword, ...userWithoutPassword } = user;
 
     const token = sign({}, authConfig.jwt.secret, {
       subject: user.id,
       expiresIn: authConfig.jwt.expiresIn,
     });
 
-    return { user, token };
+    return { user: userWithoutPassword, token };
   }
 }
 

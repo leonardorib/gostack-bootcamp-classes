@@ -23,7 +23,10 @@ class UpdateUserAvatarService {
     this.usersRepository = usersRepository;
   }
 
-  public async execute({ user_id, avatarFilename }: Request): Promise<User> {
+  public async execute({
+    user_id,
+    avatarFilename,
+  }: Request): Promise<Omit<User, 'password'>> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -43,9 +46,9 @@ class UpdateUserAvatarService {
 
     await this.usersRepository.save(user);
 
-    delete user.password;
+    const { password: userPassword, ...userWithoutPassword } = user;
 
-    return user;
+    return userWithoutPassword;
   }
 }
 
