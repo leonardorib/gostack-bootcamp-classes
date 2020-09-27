@@ -1,8 +1,5 @@
 import { Router } from 'express';
-import { parseISO } from 'date-fns';
-import { container } from 'tsyringe';
-
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
@@ -15,7 +12,16 @@ const providerAppointmentsController = new ProviderAppointmentsController();
 
 appointmentsRouter.use(ensureAuthenticated);
 
-appointmentsRouter.post('/', appointmentsController.create);
+appointmentsRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      provider_id: Joi.string().uuid().required(),
+      date: Joi.date(),
+    }),
+  }),
+  appointmentsController.create
+);
 
 appointmentsRouter.get('/me', providerAppointmentsController.index);
 

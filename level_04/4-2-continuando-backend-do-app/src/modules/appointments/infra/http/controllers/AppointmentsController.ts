@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { parseISO } from 'date-fns';
+import { isDate, parseISO } from 'date-fns';
 import { container } from 'tsyringe';
 import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 
@@ -8,8 +8,10 @@ export default class AppointmentController {
     const user_id = request.user.id;
     const { provider_id, date } = request.body;
 
-    // Converts the timestamp in the request to the native JS date object format
-    const parsedDate = parseISO(date);
+    // Converts date in the request to the native JS date object format
+    // For some reason, when using celebrate validation middleware, our date is converted from string to
+    // the actual Date type. So we are parsing the date only if it's not already a Date type.
+    const parsedDate = isDate(date) ? date : parseISO(date);
 
     const createAppointment = container.resolve(CreateAppointmentService);
 
