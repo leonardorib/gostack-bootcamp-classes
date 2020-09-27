@@ -46,9 +46,7 @@ class UpdateUserAvatarService {
 
     await this.usersRepository.save(user);
 
-    const { password: userPassword, ...userWithoutPassword } = user;
-
-    return userWithoutPassword;
+    return user;
   }
 }
 

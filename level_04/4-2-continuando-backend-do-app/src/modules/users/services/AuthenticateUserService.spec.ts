@@ -34,10 +34,8 @@ describe('AuthenticateUser', () => {
       password: '123456',
     });
 
-    const { password: userPassword, ...userWithoutPassword } = user;
-
     expect(response).toHaveProperty('token');
-    expect(response.user).toEqual(userWithoutPassword);
+    expect(response.user).toEqual(user);
   });
 
   it('should not be able to authenticate with non existing user', async () => {
