@@ -45,8 +45,6 @@ class ListProviderAppointmentsService {
         }
       );
 
-      console.log('Buscou appointments no banco');
-
       // Saves in cache
       await this.cacheProvider.save(cacheKey, appointments);
     }
