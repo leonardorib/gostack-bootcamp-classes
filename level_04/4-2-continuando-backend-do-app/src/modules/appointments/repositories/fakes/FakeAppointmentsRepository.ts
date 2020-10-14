@@ -7,6 +7,7 @@ import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllI
 import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
+import { stringType } from 'aws-sdk/clients/iam';
 
 class AppointmentsRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = [];
@@ -25,9 +26,15 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointment;
   }
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
+  public async findByDate(
+    date: Date,
+    provider_id: string
+  ): Promise<Appointment | undefined> {
     const findAppointment = this.appointments.find((appointment) => {
-      return isEqual(appointment.date, date);
+      return (
+        isEqual(appointment.date, date) &&
+        appointment.provider_id === provider_id
+      );
     });
 
     return findAppointment;

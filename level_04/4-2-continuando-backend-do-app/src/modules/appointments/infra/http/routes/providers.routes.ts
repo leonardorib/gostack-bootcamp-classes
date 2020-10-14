@@ -18,22 +18,34 @@ providersRouter.get('/', providersController.index);
 
 providersRouter.get(
   '/:provider_id/month-availability',
-  celebrate({
-    [Segments.PARAMS]: {
-      provider_id: Joi.string().uuid().required,
-    },
-  }),
   providerMonthAvailabilityController.index
 );
 
 providersRouter.get(
   '/:provider_id/day-availability',
-  celebrate({
-    [Segments.PARAMS]: {
-      provider_id: Joi.string().uuid().required,
-    },
-  }),
+
   providerDayAvailabilityController.index
 );
+
+// // Celebrate middleware not working with req.params when using req.query at the same time
+// providersRouter.get(
+//   '/:provider_id/month-availability',
+//   celebrate({
+//     [Segments.PARAMS]: {
+//       provider_id: Joi.string().uuid().required,
+//     },
+//   }),
+//   providerMonthAvailabilityController.index
+// );
+
+// providersRouter.get(
+//   '/:provider_id/day-availability',
+//   celebrate({
+//     [Segments.PARAMS]: {
+//       provider_id: Joi.string().uuid().required,
+//     },
+//   }),
+//   providerDayAvailabilityController.index
+// );
 
 export default providersRouter;
