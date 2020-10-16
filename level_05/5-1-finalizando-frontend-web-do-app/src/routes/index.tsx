@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
 import ForgotPassword from '../pages/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword';
 
 const Routes: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Routes: React.FC = () => {
       <Route path='/' exact component={SignIn}></Route>
       <Route path='/signup' exact component={SignUp}></Route>
       <Route path='/forgot-password' exact component={ForgotPassword}></Route>
+      <Route path='/reset-password' exact component={ResetPassword}></Route>
       <Route
         path='/dashboard'
         exact
