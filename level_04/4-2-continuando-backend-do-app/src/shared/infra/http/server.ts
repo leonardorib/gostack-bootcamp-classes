@@ -19,13 +19,13 @@ import '@shared/container';
 
 const app = express();
 
-app.use(rateLimiter);
-
 app.use(cors());
 
 app.use(express.json());
 
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+
+app.use(rateLimiter); // Limit is only applied to routes after this line
 
 app.use(routes);
 
