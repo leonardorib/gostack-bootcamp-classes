@@ -8,6 +8,7 @@ import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
+import Profile from '../pages/Profile';
 
 const Routes: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const Routes: React.FC = () => {
         component={Dashboard}
         isPrivate={true}
       ></Route>
+      <Route path='/profile' exact component={Profile} isPrivate={true}></Route>
     </Switch>
   );
 };
