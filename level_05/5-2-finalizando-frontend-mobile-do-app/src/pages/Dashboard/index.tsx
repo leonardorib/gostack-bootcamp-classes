@@ -11,6 +11,7 @@ import {
   HeaderTitle,
   UserName,
   ProfileButton,
+  SignOutButton,
   UserAvatar,
   ProvidersList,
   ProviderContainer,
@@ -31,7 +32,7 @@ export interface Provider {
 const Dashboard: React.FC = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
 
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const { navigate } = useNavigation();
 
@@ -59,6 +60,10 @@ const Dashboard: React.FC = () => {
           Bem vindo, {'\n'}
           <UserName>{user.name}</UserName>
         </HeaderTitle>
+
+        <SignOutButton onPress={signOut}>
+          <Icon name='power' size={20} color='#ff9000' />
+        </SignOutButton>
 
         <ProfileButton onPress={navigateToProfile}>
           <UserAvatar source={{ uri: user.avatar_url }} />
